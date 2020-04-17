@@ -1,0 +1,22 @@
+{
+  "name": "design-system-custom",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "playroom:start": "playroom start",
+    "playroom:build": "playroom build"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.9",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.32",
+    "@types/react-dom": "^16.9.6",
+    "playroom": "^0.16.1",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3"
+  }
+}
