@@ -4,7 +4,8 @@ module.exports = {
 
   title: 'My First Playroom',
   // themes: './src/themes',
-  // snippets: './playroom/FrameComopnent.js',
+  // snippets: './FrameComponent.tsx',
+  frameComponent: './FrameComponent.tsx',
   widths: [320, 768, 1024, 1920],
   port: 9000,
   openBrowser: true,

@@ -6,6 +6,7 @@ import {
   BoxProps as MUIBoxProps,
   makeStyles,
 } from '@material-ui/core';
+import { normaliseChildrenArray } from './utils/normaliseChildrenArray';
 
 const alignToDisplay = {
   left: 'block',
@@ -15,7 +16,7 @@ const alignToDisplay = {
 
 export interface StackProps {
   align?: 'left' | 'center' | 'right';
-  spacing?: number;
+  space?: number;
   children: ReactNodeNoStrings;
 
   m?: MUIBoxProps['m'];
@@ -24,7 +25,7 @@ export interface StackProps {
 }
 
 interface StyleProps {
-  spacing?: number;
+  space?: number;
 }
 
 const useStyles = makeStyles(({ spacing }) => ({
@@ -34,21 +35,12 @@ const useStyles = makeStyles(({ spacing }) => ({
     alignItems: 'inherit',
     width: '100%',
     paddingBottom: (props: StyleProps) =>
-      props.spacing ? spacing(props.spacing) : undefined,
+      props.space ? spacing(props.space) : undefined,
+    // '&:last-sibling': {
+    // paddingBottom: 0,
+    // },
   },
 }));
-
-const normaliseChildrenArray = (
-  children: ReactNodeNoStrings,
-): ReactNodeNoStrings[] => {
-  if (Array.isArray(children)) {
-    return children;
-  } else if (typeof children === 'undefined') {
-    return [];
-  } else {
-    return [children];
-  }
-};
 
 const getDisplay = (align: StackProps['align']) =>
   alignToDisplay[align ?? 'center'];
@@ -59,11 +51,11 @@ const getAlignItems = (align: StackProps['align']) =>
 
 export const Stack: FunctionComponent<StackProps> = ({
   align,
-  spacing,
+  space,
   children,
   ...props
 }) => {
-  const { stackitem } = useStyles({ spacing });
+  const { stackitem } = useStyles({ space });
   return (
     <MUIBox
       display={getDisplay(align)}
@@ -72,10 +64,7 @@ export const Stack: FunctionComponent<StackProps> = ({
       {...props}
     >
       {normaliseChildrenArray(children).map((e, index, a) => (
-        <MUIBox
-          className={index === a.length - 1 ? undefined : stackitem}
-          key={index}
-        >
+        <MUIBox className={stackitem} key={index}>
           {e}
         </MUIBox>
       ))}
