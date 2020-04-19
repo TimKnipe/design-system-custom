@@ -34,11 +34,7 @@ const useStyles = makeStyles(({ spacing }) => ({
     flexDirection: 'inherit',
     alignItems: 'inherit',
     width: '100%',
-    paddingBottom: (props: StyleProps) =>
-      props.space ? spacing(props.space) : undefined,
-    // '&:last-sibling': {
-    // paddingBottom: 0,
-    // },
+    paddingBottom: (props: StyleProps) => spacing(props?.space ?? 0),
   },
 }));
 
