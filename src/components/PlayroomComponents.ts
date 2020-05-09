@@ -5,4 +5,4 @@ export { Placeholder } from './Placeholder';
 export { Box } from './Box';
 export { Box as MUIBox } from '@material-ui/core';
 export { Inline } from './Inline';
-export { Columns } from './Columns';
+export { Columns, Column } from './Columns';
