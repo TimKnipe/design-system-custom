@@ -1,7 +1,13 @@
 import React, { useEffect, FunctionComponent } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#005bab',
+    },
+  },
+});
 
 const FrameComponent: FunctionComponent<{}> = ({ children }) => {
   useEffect(() => {

@@ -2,7 +2,7 @@ module.exports = {
   components: './src/components/PlayroomComponents.ts',
   outputPath: './dist/playroom',
 
-  title: 'My First Playroom',
+  title: 'Design System Playroom',
   // themes: './src/themes',
   // snippets: './FrameComponent.tsx',
   frameComponent: './FrameComponent.tsx',
