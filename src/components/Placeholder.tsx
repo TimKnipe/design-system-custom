@@ -13,7 +13,7 @@ const resolveToPxIfUnitless = (value: string | number) =>
 // No CSS-in-JS dependency. Deliberately using inline styles.
 export const Placeholder = ({
   label,
-  width = 'auto',
+  width = '100%',
   height = 120,
   shape = 'rectangle',
 }: PlaceholderProps) => {
