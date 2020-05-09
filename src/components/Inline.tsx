@@ -4,6 +4,7 @@ import {
   Box as MUIBox,
   BoxProps as MUIBoxProps,
   makeStyles,
+  Theme,
 } from '@material-ui/core';
 import { normaliseChildrenArray } from './utils/normaliseChildrenArray';
 
@@ -25,16 +26,14 @@ interface StyleProps {
 
 const preventCollapse = 0;
 
-const useStyles = makeStyles(({ spacing, props }) => {
-  console.log('style props:', props);
+const useStyles = makeStyles<Theme, StyleProps>(({ spacing }) => {
   return {
     inlineParent: {
       // paddingTop: 1, // prevent collapse
       '&::before': {
         content: "''",
         display: 'block',
-        marginTop: (props: StyleProps) =>
-          -spacing(props?.space ?? 0) || preventCollapse,
+        marginTop: props => -spacing(props?.space ?? 0) || preventCollapse,
       },
     },
 
@@ -43,15 +42,15 @@ const useStyles = makeStyles(({ spacing, props }) => {
       boxSizing: 'border-box',
       flexDirection: 'row',
       width: 'auto', // make sure width includes -ve margin, otherwise content is truncated on the right
-      marginLeft: (props: StyleProps) => -spacing(props?.space ?? 0),
+      marginLeft: props => -spacing(props?.space ?? 0),
     },
 
     inlineitem: {
       display: 'inherit',
       flexDirection: 'inherit',
       alignItems: 'inherit',
-      paddingLeft: (props: StyleProps) => spacing(props.space ?? 0),
-      paddingTop: (props: StyleProps) => spacing(props.space ?? 0),
+      paddingLeft: props => spacing(props.space ?? 0),
+      paddingTop: props => spacing(props.space ?? 0),
     },
   };
 });
