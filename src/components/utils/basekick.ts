@@ -10,6 +10,41 @@ interface BaseKickOptions {
   gridRowHeight: number;
 }
 
+/*
+export const Mybasekick = ({
+  typeSizeModifier,
+  baseFontSize,
+  descenderHeightScale,
+  typeRowSpan, // what is this?
+  gridRowHeight,
+  capHeight,
+}: BaseKickOptions) => {
+  const fontSize = typeSizeModifier * baseFontSize;
+
+  const lineHightOffset = Math.floor((lineHeight - fontSize) / 2);
+  const fontOffset = fontDescenderHeight + lineHeightOffset;
+
+  return {
+    base: {
+      fontSize,
+      lineHeight,
+    },
+    baselineTransform: {
+      transform: `translateY(${fontOffset}px)`,
+    },
+    cropFirstLine: {
+      paddingTop: preventCollapse,
+      '&::before': {
+        content: '""',
+        marginTop: -(?),
+        display: 'block',
+        height: 0,
+      }
+    }
+  }
+};
+*/
+
 export default ({
   typeSizeModifier,
   baseFontSize,
@@ -44,8 +79,8 @@ export default ({
     },
     cropFirstLine: {
       paddingTop: preventCollapse,
-      ':before': {
-        content: "''",
+      '&::before': {
+        content: '""',
         marginTop: -(heightCorrection + preventCollapse),
         display: 'block',
         height: 0,

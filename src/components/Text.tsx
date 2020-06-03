@@ -21,38 +21,38 @@ export interface TextProps extends TypographyProps {
     capHeight
     baseFontSize
     typeSizeModifier
-*/
 
-/* Roboto settings
+  Roboto settings
     fontFamily: 'Roboto, "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif',
     descenderHeightScale: 0.165,
-    capHeight: 0.6,
-
-      
+      capHeight: 0.6,    
 */
 
 interface StyleProps {
   size: number;
 }
 
+const DescenderHightScale = {
+  Roboto: 0.16,
+};
+
 const useStyles = (props: StyleProps) => {
   const { base, baseline, cropFirstLine } = basekick({
-    baseFontSize: 1,
+    typeSizeModifier: 1.4,
+    baseFontSize: 10,
+    gridRowHeight: 9,
+    typeRowSpan: 2,
+
     capHeight: 0.6,
-    descenderHeightScale: 0.165,
-    gridRowHeight: 16,
-    typeRowSpan: 1,
-    typeSizeModifier: 16,
+    descenderHeightScale: DescenderHightScale.Roboto,
   });
   console.log('base:', base);
   console.log('baseline:', baseline);
   console.log('cropFirstLine:', cropFirstLine);
   return makeStyles({
-    root: {
-      ...base,
-      ...baseline,
-      ...cropFirstLine,
-    },
+    base,
+    baseline,
+    cropFirstLine,
   });
 };
 
@@ -61,9 +61,12 @@ export const Text: FunctionComponent<TextProps> = ({
   children,
   ...props
 }) => {
-  const { root } = useStyles({ size })();
+  const { base, baseline, cropFirstLine } = useStyles({ size })();
   return (
-    <Typography className={root} {...props}>
+    <Typography
+      className={classnames(base, baseline, cropFirstLine)}
+      {...props}
+    >
       {children}
     </Typography>
   );
