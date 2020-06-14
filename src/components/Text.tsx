@@ -8,9 +8,46 @@ import {
 import basekick from './utils/basekick';
 import classnames from 'classnames';
 
-export interface TextProps extends TypographyProps {
-  size?: number;
+export type TextVariant = 'heading' | 'normal';
+
+export interface TextProps {
+  variant?: TextVariant;
+  //
+  style?: TypographyProps['style'];
+  noWrap?: TypographyProps['noWrap'];
 }
+/*
+  | 'root'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'subtitle1'
+  | 'subtitle2'
+  | 'body1'
+  | 'body2'
+  | 'caption'
+  | 'button'
+  | 'overline'
+  | 'srOnly'
+  | 'alignLeft'
+  | 'alignCenter'
+  | 'alignRight'
+  | 'alignJustify'
+  | 'noWrap'
+  | 'gutterBottom'
+  | 'paragraph'
+  | 'colorInherit'
+  | 'colorPrimary'
+  | 'colorSecondary'
+  | 'colorTextPrimary'
+  | 'colorTextSecondary'
+  | 'colorError'
+  | 'displayInline'
+  | 'displayBlock';
+*/
 
 /*
   Whitespace above Capitals and below descenders is clipped, allowing more
@@ -29,26 +66,34 @@ export interface TextProps extends TypographyProps {
 */
 
 interface StyleProps {
-  size: number;
+  variant: TextVariant;
 }
 
 const DescenderHightScale = {
-  Roboto: 0.16,
+  Roboto: 0.165,
+};
+
+const Sizes = {
+  heading: {
+    typeRowSpan: 3,
+    typeSizeModifier: 2.1,
+  },
+  normal: {
+    typeRowSpan: 2,
+    typeSizeModifier: 1.4,
+  },
 };
 
 const useStyles = (props: StyleProps) => {
   const { base, baseline, cropFirstLine } = basekick({
-    typeSizeModifier: 1.4,
+    typeSizeModifier: Sizes[props.variant].typeSizeModifier,
     baseFontSize: 10,
     gridRowHeight: 9,
-    typeRowSpan: 2,
+    typeRowSpan: Sizes[props.variant].typeRowSpan,
 
     capHeight: 0.6,
     descenderHeightScale: DescenderHightScale.Roboto,
   });
-  console.log('base:', base);
-  console.log('baseline:', baseline);
-  console.log('cropFirstLine:', cropFirstLine);
   return makeStyles({
     base,
     baseline,
@@ -57,11 +102,11 @@ const useStyles = (props: StyleProps) => {
 };
 
 export const Text: FunctionComponent<TextProps> = ({
-  size = 1,
+  variant = 'normal',
   children,
   ...props
 }) => {
-  const { base, baseline, cropFirstLine } = useStyles({ size })();
+  const { base, baseline, cropFirstLine } = useStyles({ variant })();
   return (
     <Typography
       className={classnames(base, baseline, cropFirstLine)}
